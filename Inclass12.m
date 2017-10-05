@@ -5,9 +5,17 @@
 
 % 1. Use the channel that marks the cell nuclei. Produce an appropriately
 % smoothed image with the background subtracted. 
+rad=10;
+sigma=3;
+fgauss=fspecial('gaussian',rad,sigma);
 
+imgsmooth=imfilter(img1,fgauss);
+imshow(imgsmooth,[500,5000])
 % 2. threshold this image to get a mask that marks the cell nuclei. 
-
+img_m=img1 > 800;
+img_m=img1 > 900;
+img_m=img1 > 1000;
+img_m=img1 > 1100;
 % 3. Use any morphological operations you like to improve this mask (i.e.
 % no holes in nuclei, no tiny fragments etc.)
 
