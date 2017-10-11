@@ -10,17 +10,15 @@ sigma=3;
 fgauss=fspecial('gaussian',rad,sigma);
 
 imgsmooth=imfilter(img1,fgauss);
-imshow(imgsmooth,[500,5000]);
 
-imgbg=imopen(imgsmooth,strel('disk',100));
+imgbg=imopen(imgsmooth,strel('disk',50));
 imgsm_bg=imsubtract(imgsmooth,imgbg);
 
 imshow(imgsm_bg,[0,4500])
 % 2. threshold this image to get a mask that marks the cell nuclei. 
-img_m=img1 > 800;
-img_m=img1 > 900;
-img_m=img1 > 1000;
-img_m=img1 > 1100;
+img_m=imgsm_bg > 50;
+img_sm1=uint16(img_m)*500;
+imshow(img_sm1,[0,800])
 % 3. Use any morphological operations you like to improve this mask (i.e.
 % no holes in nuclei, no tiny fragments etc.)
 img_close=imclose(imgsm_bg,strel('disk',5));
